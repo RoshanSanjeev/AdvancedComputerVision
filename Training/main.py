@@ -37,17 +37,19 @@ def readWebCam():
     cv2.destroyAllWindows()
 
 def readDownload():
-    cap = cv2.VideoCapture('Videos/FrontSquat.mp4')
+    cap = cv2.VideoCapture('/Users/roshansanjeev/Desktop/AdvancedComputerVision/Videos/SideAirSquat.mp4')
     
     while cap.isOpened():
         success, frame = cap.read()
         if not success:
             break
         
-        cv2.imshow("Frame", frame)
-        cv2.waitkey(1)
+        # Show frame
+        cv2.imshow('MediaPipe Pose', frame)
+        if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
         
 
-readWebCam()
+#readWebCam()
 #-or-
-#readDownload()
+readDownload()
