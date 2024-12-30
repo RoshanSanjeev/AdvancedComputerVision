@@ -56,8 +56,10 @@ def readDownload():
         if result.pose_landmarks:
             mp_drawing = mp.solutions.drawing_utils
             mp_drawing.draw_landmarks(frame, result.pose_landmarks, mp_pose.POSE_CONNECTIONS)
-            
-        print(result.pose_landmarks)
+            for id, lm in enumerate(result.pose_landmarks.landmark):
+                h,w,c = frame.shape
+                print(id, lm)
+                cx, cy = int (lm.x * w), int(lm.y * h)
         #show framerate
         cTime = time.time()
         fps = 1/(cTime-pTime)
