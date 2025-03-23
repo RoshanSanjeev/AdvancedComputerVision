@@ -50,6 +50,7 @@ def readDownload():
         success, frame = cap.read()
         if not success:
             break
+        
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         result = pose.process(frame_rgb)
         
