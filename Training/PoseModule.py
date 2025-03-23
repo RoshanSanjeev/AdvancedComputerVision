@@ -72,7 +72,7 @@ class poseDetector:
 
 
 def main():
-    cap = cv2.VideoCapture('/Users/roshansanjeev/Desktop/AdvancedComputerVision/Videos/SideAirSquat.mp4')
+    cap = cv2.VideoCapture('/Users/roshansanjeev/Desktop/AdvancedComputerVision/Videos/6454280-uhd_2160_3840_24fps.mp4')
     pTime = 0
     detector = poseDetector()
 
@@ -94,17 +94,17 @@ def main():
 
             if all(k in lmDict for k in [23, 25, 27]):
                 left_angle = detector.getAngle(lmDict[23], lmDict[25], lmDict[27])
-                cv2.putText(frame, f"{int(left_angle)}°", lmDict[25],
+                cv2.putText(frame, f"{int(left_angle)}deg", lmDict[25],
                             cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 255), 2)
 
             if all(k in lmDict for k in [24, 26, 28]):
                 right_angle = detector.getAngle(lmDict[24], lmDict[26], lmDict[28])
-                cv2.putText(frame, f"{int(right_angle)}°", lmDict[26],
+                cv2.putText(frame, f"{int(right_angle)}deg", lmDict[26],
                             cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 255), 2)
 
             # Now compare if both angles exist
             if left_angle is not None and right_angle is not None:
-                if abs(left_angle - right_angle) < 1:
+                if abs(left_angle - right_angle) < 5:
                     drawing_spec_connections = mp.solutions.drawing_utils.DrawingSpec(
                         color=(0, 255, 0), thickness=2, circle_radius=2)  # Green
                 else:
@@ -132,7 +132,7 @@ def main():
 
                 # Show frame
                 cv2.imshow('MediaPipe Pose', frame)
-                if cv2.waitKey(10) & 0xFF == ord('q'):
+                if cv2.waitKey(100) & 0xFF == ord('q'):
                     break
 
     cap.release()
